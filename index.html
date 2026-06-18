@@ -737,7 +737,6 @@
   // ─────────────────────────────────────────────────────────────────────────────
   // CONFIGURATION — edit these two constants, nothing else needs to change
   // ─────────────────────────────────────────────────────────────────────────────
-  const API_KEY      = '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';  // PASTE YOUR ANTHROPIC API KEY HERE
   const PHONE_NUMBER = '+13365698756';  // PASTE YOUR RETELL PHONE NUMBER HERE (format: +17705550192)
   // ─────────────────────────────────────────────────────────────────────────────
 
@@ -853,24 +852,10 @@ Hours: Daily 7am–6pm`;
     setWaiting(true);
 
     // Guard: no API key
-    if (!API_KEY) {
-      setTimeout(function() {
-        removeTyping();
-        addMsg('assistant', "I'd love to help! This demo requires an API key to be configured — add your Anthropic API key at the top of the script block to activate me. In the meantime, reach us at (770) 555-0192 or info@pebblecreekcc.com.");
-        chatHistory.pop(); // remove the user message so chatHistory stays clean for when the key is added
-        setWaiting(false);
-        input.focus();
-      }, 400);
-      return;
-    }
-
-    fetch('https://api.anthropic.com/v1/messages', {
+    fetch('https://pebble-creek-proxy.roshanm2003.workers.dev', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
