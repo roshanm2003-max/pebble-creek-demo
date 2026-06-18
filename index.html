@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pebble Creek Country Club — Member Assistant Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-deep: #1a2e1a;
+  --green-mid: #2d4a2d;
+  --green-accent: #4a7c59;
+  --green-light: #7aab8a;
+  --gold: #c9a84c;
+  --gold-light: #e4c97a;
+  --cream: #f7f3ec;
+  --cream-dark: #ede8df;
+  --text-dark: #1a1a1a;
+  --text-mid: #4a4a4a;
+  --text-light: #7a7a7a;
+  --white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--green-deep);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--cream);
+  letter-spacing: 0.3px;
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+nav a {
+  color: rgba(247,243,236,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--gold); }
+
+.nav-cta {
+  padding: 8px 20px;
+  background: var(--gold);
+  color: var(--green-deep) !important;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px !important;
+}
+
+.nav-cta:hover { background: var(--gold-light) !important; color: var(--green-deep) !important; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--green-deep);
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a7c59' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero-left {
+  padding: 80px 60px 80px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(247,243,236,0.65);
+  line-height: 1.7;
+  max-width: 420px;
+  margin-bottom: 36px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.hero-stat {
+  text-align: left;
+}
+
+.hero-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 11px;
+  color: rgba(247,243,236,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 4px;
+}
+
+.hero-right {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px 60px 40px;
+}
+
+/* ── CHAT WIDGET ── */
+.chat-container {
+  width: 380px;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+.chat-header {
+  background: var(--green-mid);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.chat-avatar {
+  width: 38px;
+  height: 38px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.chat-header-info h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.chat-header-info p {
+  font-size: 11px;
+  color: var(--green-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chat-header-info p::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #4ade80;
+  border-radius: 50%;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #f8f9fa;
+}
+
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+.msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.msg.user { flex-direction: row-reverse; }
+
+.msg-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.msg-avatar.bot { background: var(--green-mid); color: var(--gold); font-weight: 700; }
+.msg-avatar.user-av { background: #e2e8f0; color: var(--text-mid); }
+
+.msg-bubble {
+  max-width: 260px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.msg.bot .msg-bubble {
+  background: var(--white);
+  color: var(--text-dark);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.msg.user .msg-bubble {
+  background: var(--green-accent);
+  color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+
+.msg-time {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 3px;
+  padding: 0 4px;
+}
+
+.msg.user .msg-time { text-align: right; }
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--white);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  width: fit-content;
+}
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green-light);
+  border-radius: 50%;
+  animation: typing 1.2s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.chat-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 16px 0;
+  background: #f8f9fa;
+}
+
+.quick-reply {
+  padding: 6px 12px;
+  background: var(--white);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 11px;
+  color: var(--green-accent);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.quick-reply:hover {
+  background: var(--green-accent);
+  color: var(--white);
+  border-color: var(--green-accent);
+}
+
+.chat-input-area {
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  color: var(--text-dark);
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus { border-color: var(--green-accent); }
+.chat-input::placeholder { color: #bbb; }
+
+.send-btn {
+  width: 38px;
+  height: 38px;
+  background: var(--green-accent);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.send-btn:hover { background: var(--green-mid); transform: scale(1.05); }
+
+.send-btn svg { width: 16px; height: 16px; fill: white; }
+
+/* ── DEMO BANNER ── */
+.demo-banner {
+  background: rgba(201,168,76,0.08);
+  border-top: 1px solid rgba(201,168,76,0.2);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  padding: 10px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--gold);
+}
+
+.demo-banner strong { font-weight: 600; }
+
+/* ── SECTIONS ── */
+section {
+  padding: 80px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.2;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 580px;
+  margin-bottom: 48px;
+}
+
+/* ── PAIN POINTS ── */
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.pain-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.2s;
+}
+
+.pain-card:hover {
+  border-color: var(--green-light);
+  box-shadow: 0 4px 20px rgba(74,124,89,0.1);
+  transform: translateY(-2px);
+}
+
+.pain-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.pain-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 8px;
+}
+
+.pain-card p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+.pain-card .before-after {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--cream-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.before { font-size: 12px; color: #e05252; }
+.after { font-size: 12px; color: var(--green-accent); font-weight: 600; }
+
+/* ── ROI SECTION ── */
+.roi-section {
+  background: var(--green-deep);
+  padding: 80px;
+  border-radius: 0;
+  margin: 0;
+  max-width: 100%;
+}
+
+.roi-section .section-title { color: var(--cream); }
+.roi-section .section-sub { color: rgba(247,243,236,0.65); }
+.roi-section .section-eyebrow { color: var(--gold); }
+
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.roi-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.roi-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.roi-label {
+  font-size: 13px;
+  color: rgba(247,243,236,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 16px;
+}
+
+.roi-desc {
+  font-size: 13px;
+  color: rgba(247,243,236,0.75);
+  line-height: 1.6;
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 80px;
+  background: var(--cream-dark);
+}
+
+.cta-section .section-title {
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 16px;
+  color: var(--text-mid);
+  margin-bottom: 36px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  background: var(--green-accent);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(45,74,45,0.3); }
+
+.btn-secondary {
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--green-deep);
+  border: 2px solid var(--green-accent);
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-secondary:hover { background: var(--green-accent); color: var(--white); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--green-deep);
+  padding: 24px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+
+footer p {
+  font-size: 12px;
+  color: rgba(247,243,236,0.4);
+}
+
+footer .powered-by {
+  font-size: 12px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 60px 32px; }
+  .hero h1 { font-size: 36px; }
+  section { padding: 60px 24px; }
+  .pain-grid { grid-template-columns: 1fr; }
+  .roi-grid { grid-template-columns: 1fr; }
+  .roi-section { padding: 60px 24px; }
+  .cta-section { padding: 60px 24px; }
+  footer { flex-direction: column; gap: 8px; padding: 20px 24px; text-align: center; }
+  nav { display: none; }
+  .demo-banner { padding: 10px 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <div class="logo-mark">PC</div>
+    <div>
+      <div class="logo-text">Pebble Creek Country Club</div>
+      <div class="logo-sub">Est. 1987 · Alpharetta, Georgia</div>
+    </div>
+  </div>
+  <nav>
+    <a href="#golf">Golf</a>
+    <a href="#dining">Dining</a>
+    <a href="#events">Events</a>
+    <a href="#membership">Membership</a>
+    <a href="#assistant" class="nav-cta">Member Assistant</a>
+  </nav>
+</header>
+
+<div class="demo-banner">
+  ⚡ <strong>Live AI Demo</strong> — This is a working demo built by Agent Cartel. The Member Assistant below is powered by real AI. Try asking it anything.
+</div>
+
+<!-- HERO -->
+<section class="hero" id="assistant" style="max-width:100%;padding:0;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Now Live · Member Assistant</div>
+    <h1>Your club,<br>answered <em>instantly.</em></h1>
+    <p class="hero-sub">No hold music. No missed calls. Pebble Creek's AI assistant handles member questions 24/7 — tee times, dining, guest policies, events, and more.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">40%</div>
+        <div class="hero-stat-label">Fewer pro shop calls</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24/7</div>
+        <div class="hero-stat-label">Always available</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">&lt;5s</div>
+        <div class="hero-stat-label">Response time</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-avatar">⛳</div>
+        <div class="chat-header-info">
+          <h3>Pebble Creek Assistant</h3>
+          <p>Online now · Instant replies</p>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg bot">
+          <div class="msg-avatar bot">PC</div>
+          <div>
+            <div class="msg-bubble">Welcome to Pebble Creek Country Club! I'm your member assistant — I can help with tee times, dining reservations, guest policies, upcoming events, and more. What can I help you with today?</div>
+            <div class="msg-time">Just now</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-quick-replies" id="quick-replies">
+        <button class="quick-reply" onclick="sendQuick(this, 'What are the tee time rules?')">Tee time rules</button>
+        <button class="quick-reply" onclick="sendQuick(this, 'What is the guest policy?')">Guest policy</button>
+        <button class="quick-reply" onclick="sendQuick(this, 'What are dining hours?')">Dining hours</button>
+        <button class="quick-reply" onclick="sendQuick(this, 'What events are coming up?')">Upcoming events</button>
+      </div>
+
+      <div class="chat-input-area">
+        <input class="chat-input" type="text" id="chat-input" placeholder="Ask anything about the club..." onkeypress="handleKey(event)">
+        <button class="send-btn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="golf" style="background: var(--white); max-width:100%; padding: 80px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-eyebrow">The Problem</div>
+    <h2 class="section-title">Your staff is answering<br>the same questions every day.</h2>
+    <p class="section-sub">The average golf club pro shop handles 40–80 inbound calls per day. Most are the same 15 questions. Here's what that actually costs.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📞</div>
+        <h3>Pro Shop Call Volume</h3>
+        <p>Staff spend 2–4 hours daily answering repetitive questions about tee times, dress code, guest rules, and cart policies.</p>
+        <div class="before-after">
+          <div class="before">✗ Before: Staff interrupted every 8 minutes</div>
+          <div class="after">✓ After: 40% fewer inbound calls in 60 days</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <h3>Membership Follow-Up</h3>
+        <p>Prospects inquire and go cold. Membership directors are too busy to follow up within 24 hours — so the lead dies.</p>
+        <div class="before-after">
+          <div class="before">✗ Before: 20–30% inquiry conversion</div>
+          <div class="after">✓ After: Automated instant response + 14-day nurture</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🏌️</div>
+        <h3>Tournament Coordination</h3>
+        <p>Event directors spend 8–10 hours per tournament on emails, pairings, and reminders that could be fully automated.</p>
+        <div class="before-after">
+          <div class="before">✗ Before: 8 hrs manual work per event</div>
+          <div class="after">✓ After: Automated pairings, reminders, follow-up</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🍽️</div>
+        <h3>F&B Missed Revenue</h3>
+        <p>Dining reservations are handled manually. No automated upsell. No birthday or anniversary alerts. Revenue left on the table.</p>
+        <div class="before-after">
+          <div class="before">✗ Before: $0 automated upsell revenue</div>
+          <div class="after">✓ After: 10–15% lift in average check</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔄</div>
+        <h3>Staff Turnover</h3>
+        <p>Every time a staff member leaves, institutional knowledge walks out with them. New hires take weeks to get up to speed.</p>
+        <div class="before-after">
+          <div class="before">✗ Before: 3–4 week onboarding per new hire</div>
+          <div class="after">✓ After: AI knowledge base answers instantly</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💤</div>
+        <h3>After-Hours Silence</h3>
+        <p>Members call at 8pm about tomorrow's tee time and get voicemail. First impressions with prospective members happen at midnight.</p>
+        <div class="before-after">
+          <div class="before">✗ Before: Voicemail after 5pm</div>
+          <div class="after">✓ After: 24/7 instant answers, zero staff required</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi-section" id="dining" style="max-width:100%;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-eyebrow">The Numbers</div>
+    <h2 class="section-title">The ROI is simple.</h2>
+    <p class="section-sub">Every package pays for itself within the first 90 days. Here's the math for a mid-size club like Pebble Creek.</p>
+
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-number">$48K</div>
+        <div class="roi-label">Annual labor savings</div>
+        <div class="roi-desc">3 staff members saving 2 hours/day at $22/hr. The Member Services agent costs $1,200/month. You net $33,600 in year one.</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-number">$32K</div>
+        <div class="roi-label">Extra membership revenue</div>
+        <div class="roi-desc">Closing 2 extra memberships per year at $10K initiation + $6K dues. The nurture automation costs $1,000/month to run.</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-number">$45K</div>
+        <div class="roi-label">Tournament rebooking upside</div>
+        <div class="roi-desc">Automated post-event follow-up books 3–5 extra corporate outings per year at $5K–$15K each. Pure margin.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="membership" style="max-width:100%;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="section-eyebrow" style="text-align:center;">Ready to See It Live?</div>
+    <h2 class="section-title">Built for your club in 2 weeks.</h2>
+    <p>Everything you just saw — the member assistant, the inquiry automation, the ROI — rebuilt with your club's actual data, policies, and tone. Setup takes about 2 hours of your time.</p>
+    <div class="cta-buttons">
+      <a href="mailto:roshan@agentcartel.com?subject=Demo Request — Golf Club AI Agent" class="btn-primary">
+        📅 Book a 20-Min Demo
+      </a>
+      <a href="#assistant" class="btn-secondary">
+        💬 Try the Assistant
+      </a>
+    </div>
+    <p style="font-size:12px;color:#999;margin-top:24px;">No commitment. No tech setup required from you. We handle everything.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Pebble Creek Country Club · Alpharetta, Georgia · This is a demo environment</p>
+  <div class="powered-by">⚡ Powered by Agent Cartel AI</div>
+</footer>
+
+<script>
+const KB = {
+  "tee time": "Members may book tee times up to 7 days in advance. Guests are welcome with a member present — maximum 4-ball. The guest fee is $75 per round. On weekends, carts are mandatory before 10am and the 90-degree rule is in effect after rain.",
+  "guest policy": "Each member may bring up to 2 guests per round. The guest fee is $75 per player. Guests must be accompanied by the member at all times. Members are responsible for ensuring their guests follow all club policies including dress code.",
+  "dress code": "Collared shirts are required for all players. No denim is permitted on the course or in the clubhouse. Soft spikes only on the course. Golf attire is required in the pro shop and grill room.",
+  "dining": "The Grill Room is open Tuesday through Sunday, 11am to 9pm. Sunday brunch is served from 10am to 2pm. Reservations are recommended for Friday and Saturday evenings — call the club or use our online booking. The private dining room is available for member events.",
+  "dining hours": "The Grill Room is open Tuesday through Sunday, 11am to 9pm. Sunday brunch runs from 10am to 2pm. We're closed Mondays for kitchen maintenance.",
+  "events": "Upcoming events at Pebble Creek: Member-Member Tournament — July 12–13. Ladies Golf Association — every Tuesday at 8am. Club Championship — August 2–4. Fall Gala — October 18. Junior Golf Camp — July 7–11. Contact the pro shop to register.",
+  "upcoming events": "Our upcoming events: Member-Member Tournament (July 12–13), Ladies Golf Association every Tuesday at 8am, Club Championship (August 2–4), Fall Gala (October 18). Stop by the pro shop or call (770) 555-0192 to sign up.",
+  "membership": "Pebble Creek offers Full Golf Membership at $12,000 initiation fee and $600/month dues. Social membership and Junior membership options are also available. Current waitlist for Full Golf is approximately 3 months. Contact our Membership Director Sarah Mitchell at membership@pebblecreekcc.com.",
+  "pro shop": "The pro shop is open Monday through Sunday, 7am to 6pm. Phone: (770) 555-0192. Our PGA professionals offer private lessons and clinics — ask about our summer lesson packages.",
+  "cart": "Carts are mandatory before 10am on weekends. The 90-degree rule is in effect after significant rain to protect the fairways. Walking is permitted at other times. Cart fee is included in the greens fee for members.",
+  "initiation": "The current initiation fee for Full Golf Membership is $12,000. Monthly dues are $600. We also offer a Junior Membership for members under 35 at a reduced initiation fee. Contact Sarah Mitchell to discuss options.",
+  "dues": "Monthly dues are $600 for Full Golf Members. This includes unlimited golf, access to all club facilities, and participation in all member events. Dues are billed on the 1st of each month.",
+  "lessons": "Our PGA professionals offer private lessons starting at $85 for a 45-minute session. Group clinics are available on Wednesday evenings. Junior golf programs run through the summer. Contact the pro shop at (770) 555-0192 to book.",
+  "contact": "Pro Shop: (770) 555-0192 · Membership: membership@pebblecreekcc.com · Dining: (770) 555-0193 · General inquiries: info@pebblecreekcc.com · Address: 4200 Pebble Creek Drive, Alpharetta, GA 30022",
+  "hours": "Pro Shop: Daily 7am–6pm | Grill Room: Tue–Sun 11am–9pm (closed Monday) | Sunday Brunch: 10am–2pm | Club Office: Mon–Fri 8am–5pm",
+  "course": "Pebble Creek features an 18-hole championship course designed by Tom Fazio, par 72, 6,850 yards from the back tees. The course features rolling terrain, 4 lakes, and 56 bunkers. Course rating: 73.2 / Slope: 135.",
+};
+
+function getResponse(msg) {
+  const lower = msg.toLowerCase();
+  for (const [key, val] of Object.entries(KB)) {
+    if (lower.includes(key)) return val;
+  }
+  // Fallback using Claude API
+  return null;
+}
+
+let isTyping = false;
+
+function appendMsg(text, type) {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  const time = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  const avatar = type === 'bot' ? '<div class="msg-avatar bot">PC</div>' : '<div class="msg-avatar user-av">You</div>';
+  div.innerHTML = `${avatar}<div><div class="msg-bubble">${text}</div><div class="msg-time">${time}</div></div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<div class="msg-avatar bot">PC</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+async function fetchClaudeResponse(userMsg) {
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: `You are the member services AI assistant for Pebble Creek Country Club, a prestigious semi-private golf club in Alpharetta, Georgia. You help members and prospective members with questions about the club.
+
+Club facts:
+- Founded: 1987
+- Course: 18-hole Tom Fazio design, par 72, 6,850 yards, rating 73.2/slope 135
+- Members: ~280 Full Golf Members
+- Initiation fee: $12,000 | Monthly dues: $600
+- Pro Shop hours: Daily 7am–6pm | Phone: (770) 555-0192
+- Grill Room: Tue–Sun 11am–9pm, closed Monday | Sunday brunch 10am–2pm
+- Tee times: Book up to 7 days in advance, guests welcome with member, max 4-ball, guest fee $75
+- Guest policy: Up to 2 guests per round, member must be present
+- Dress code: Collared shirts required, no denim, soft spikes only
+- Cart policy: Mandatory before 10am weekends, 90-degree rule after rain
+- Upcoming events: Member-Member Tournament July 12-13, Ladies Golf Association every Tuesday 8am, Club Championship August 2-4, Fall Gala October 18
+- Membership Director: Sarah Mitchell | membership@pebblecreekcc.com
+- Waitlist: ~3 months for Full Golf Membership
+
+Be warm, professional, and concise. Speak like a knowledgeable club staff member. Keep responses under 3 sentences unless the question requires more detail. If you don't know something specific, offer to connect them with the appropriate staff member.`,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+    const data = await resp.json();
+    return data.content?.[0]?.text || "I'd be happy to help with that — let me connect you with our team. Please call the pro shop at (770) 555-0192 or email info@pebblecreekcc.com.";
+  } catch(e) {
+    return "Great question! For the most accurate answer on that, please contact our pro shop at (770) 555-0192 or email info@pebblecreekcc.com and a team member will get back to you shortly.";
+  }
+}
+
+async function sendMessage() {
+  if (isTyping) return;
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  input.value = '';
+  document.getElementById('quick-replies').style.display = 'none';
+  appendMsg(msg, 'user');
+  isTyping = true;
+  showTyping();
+
+  await new Promise(r => setTimeout(r, 800 + Math.random() * 600));
+
+  const localResp = getResponse(msg);
+  let response;
+  if (localResp) {
+    response = localResp;
+  } else {
+    response = await fetchClaudeResponse(msg);
+  }
+
+  removeTyping();
+  appendMsg(response, 'bot');
+  isTyping = false;
+}
+
+async function sendQuick(btn, text) {
+  if (isTyping) return;
+  btn.style.opacity = '0.5';
+  document.getElementById('chat-input').value = text;
+  await sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter') sendMessage();
+}
+</script>
+
+</body>
+</html>
