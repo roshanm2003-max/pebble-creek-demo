@@ -706,7 +706,7 @@
     <h2 class="cta-title">Built for Your Club<br>in 2 Weeks</h2>
     <p class="cta-sub">What you just tried isn't a prototype — it's production-grade. We build this same experience, trained on <em>your</em> club's knowledge, branded for <em>your</em> club's voice, deployed in two weeks flat.</p>
     <div class="cta-btns">
-      <a href="mailto:info@agentcartel.com?subject=Demo%20Request%20-%20AI%20Member%20Services" class="btn-p">Book a Demo Call</a>
+      <a href="mailto:solarcrestai@gmail.com?subject=Demo%20Request%20-%20AI%20Member%20Services" class="btn-p">Book a Demo Call</a>
       <a href="#assistant" class="btn-s">Try the Assistant Again</a>
     </div>
     <div class="cta-widgets">
@@ -812,10 +812,20 @@ Hours: Daily 7am–6pm`;
   document.getElementById('cta-call-btn').href = 'tel:' + PHONE_NUMBER;
 
   // ── Helpers ───────────────────────────────────────────────────────────────
+  function renderText(text) {
+    // Escape HTML, then convert **bold** to <strong>
+    var escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+
   function addMsg(role, text) {
     var d = document.createElement('div');
     d.className = 'msg ' + (role === 'user' ? 'msg-user' : 'msg-ai');
-    d.textContent = text;
+    if (role === 'assistant') {
+      d.innerHTML = renderText(text);
+    } else {
+      d.textContent = text;
+    }
     msgs.appendChild(d);
     msgs.scrollTop = msgs.scrollHeight;
   }
